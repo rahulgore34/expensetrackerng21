@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { HttpDataService } from '../services/httpdata.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,10 +8,16 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
+  private httpDataService = inject(HttpDataService);
 
-
-  constructor() {
-    console.log('Hello ',environment.envName)
-
-   }
+  sayHello() {
+    this.httpDataService.getData('api/hello').subscribe({
+      next: (response) => {
+        console.log('ok..',response)
+      },
+      error: (error) => {
+        console.error('Error:', error)
+      }
+    })
+  }
 }
