@@ -9,6 +9,7 @@ import { HttpDataService } from '../services/httpdata.service';
 })
 export class AuthComponent {
   private httpDataService = inject(HttpDataService);
+  envName = environment.envName; // Fetch envName from environment
 
   sayHello() {
     this.httpDataService.getData('api/hello').subscribe({
@@ -19,5 +20,10 @@ export class AuthComponent {
         console.error('Error:', error)
       }
     })
+  }
+
+  callAzureFunction() {
+    console.log('Call Azure Function button clicked');
+    // Add logic to call the Azure function here
   }
 }
