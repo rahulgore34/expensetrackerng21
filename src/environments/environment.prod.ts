@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   envName: 'production',
-  apiUrl: 'https://prod-api.azurewebsites.net'
+  apiUrl: 'https://expensetrackernodeapi-c0f6aqbqf6fncpb7.eastasia-01.azurewebsites.net'
 };

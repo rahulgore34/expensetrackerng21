@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { HttpDataService } from '../services/httpdata.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,10 +8,22 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
+  private httpDataService = inject(HttpDataService);
+  envName = environment.envName; // Fetch envName from environment
 
+  sayHello() {
+    this.httpDataService.getData('api/hello').subscribe({
+      next: (response) => {
+        console.log('ok..',response)
+      },
+      error: (error) => {
+        console.error('Error:', error)
+      }
+    })
+  }
 
-  constructor() {
-    console.log('Hello ',environment.envName)
-
-   }
+  callAzureFunction() {
+    console.log('Call Azure Function button clicked');
+    // Add logic to call the Azure function here
+  }
 }
