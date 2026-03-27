@@ -27,4 +27,9 @@ export class HttpDataService {
   deleteData(endpoint: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${endpoint}`);
   }
+
+  // Function to call HTTP GET on azurefnUrl
+  getAzureFunctionData() {
+    return this.http.get(environment.azurefnUrl);
+  }
 }
