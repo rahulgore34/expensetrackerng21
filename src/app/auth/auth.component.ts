@@ -25,10 +25,23 @@ export class AuthComponent implements OnDestroy {
     this.subscriptions.push(subscription);
   }
 
+//Dirctly calling azure function without going through node server
   callAzureFunction() {
     const subscription = this.httpDataService.getAzureFunctionData().subscribe({
       next: (response) => {
         console.log('ok azure..', response);
+      },
+      error: (error) => {
+        console.error('Error:', error);
+      }
+    });
+    this.subscriptions.push(subscription);
+  }
+
+  callNodeAzureFn() {
+    const subscription = this.httpDataService.getData('api/callazurefn').subscribe({
+      next: (response) => {
+        console.log('ok azure from node..', response);
       },
       error: (error) => {
         console.error('Error:', error);
