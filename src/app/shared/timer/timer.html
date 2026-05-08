@@ -1,0 +1,17 @@
+<div class="text-center mt-3">
+  @if(!isExpired()){
+  <h3> ⏳ Time remaining: {{ displayTime() }}</h3>
+  }
+
+
+  @if(isExpired()){
+  <h3 style="color: red;">
+    OTP expired
+  </h3>
+    <button  (click)="startTimer()">
+    Resend OTP
+  </button>
+  }
+
+
+</div>

@@ -1,0 +1,40 @@
+<section class="myarea-shell">
+  <div class="flex gap-2 text-2xl mb-6 font-bold">
+    <p>Score: {{ score() }}</p>
+    @for (item of stars; track $index) {
+      <span class="text-8xl" [ngClass]="{ 'text-yellow-400': score()>=item, 'text-gray-300':  score()=== 0 }">★</span>
+    }
+  </div>
+
+  @if (showQuiz()) {
+    <div class="flex gap-3">
+      <div class="bg-red-300 p-4 rounded-xl text-8xl self-center">
+        <h1>{{ numberOne() }}</h1>
+      </div>
+      <div class="bg-blue-300 p-4 rounded-xl text-8xl self-center">
+        <h1>+</h1>
+      </div>
+      <div class="bg-green-300 p-4 rounded-xl text-8xl self-center">
+        <h1>{{ numberTwo() }}</h1>
+      </div>
+      <div class="bg-pink-300 p-4 rounded-xl text-8xl self-center">
+        <h1>=</h1>
+      </div>
+      <div class="bg-green-300 p-4 rounded-xl text-8xl">
+        <input
+          type="number"
+          class="w-50 h-50 text-center rounded-full bg-blue-100 focus:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+          [(ngModel)]="answerField"
+          (input)="onAnswerInput($event)"
+          #answerInput
+        />
+      </div>
+    </div>
+  }
+
+  @if (showFirework()) {
+    <div class="flex justify-center mt-10">
+      <div id="firework-container" class="w-full h-96"></div>
+    </div>
+  }
+</section>

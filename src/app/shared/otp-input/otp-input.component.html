@@ -1,0 +1,33 @@
+<div class="flex flex-col items-center gap-4">
+  <p class="text-sm font-medium text-gray-700">{{ label }}</p>
+  <div class="flex gap-3">
+    @for (digit of otpDigits; track $index) {
+      <input
+        #otpInput
+        type="text"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        maxlength="1"
+        [ngModel]="digit"
+        (ngModelChange)="otpDigits[$index] = $event"
+        (input)="onOtpInput($event, $index)"
+        (keydown)="onOtpKeydown($event, $index)"
+        (paste)="onOtpPaste($event)"
+        [attr.aria-label]="'OTP digit ' + ($index + 1)"
+        class="h-12 w-12 rounded border border-gray-300 text-center text-xl font-semibold text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+        [autofocus]="$index === 0"
+      />
+    }
+
+  </div>
+  <p><app-timer></app-timer></p>
+  @if (isOtpComplete) {
+    <button
+      type="button"
+      class="rounded bg-green-600 px-5 py-2 font-medium text-white transition hover:bg-green-700"
+      (click)="submitOtp()"
+    >
+      {{ submitButtonText }}
+    </button>
+  }
+</div>

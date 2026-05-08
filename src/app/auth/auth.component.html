@@ -1,6 +1,32 @@
-<p style="color: BLUE;">RAHUL GORE AUTH!!!!!</p>
-<div style="display: flex; gap: 10px;">
+<p class="text-blue-700">RAHUL GORE AUTH!!!!!</p>
+<div class="flex gap-2.5">
   <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700" (click)="sayHello()">Get Name - {{ envName }}</button>
   <button type="button" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700" (click)="callAzureFunction()">Call Azure Function</button>
   <button type="button" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-red-700" (click)="callNodeAzureFn()">Call Node-Azure Function</button>
+</div>
+
+<hr/><hr/>
+<div class="flex min-h-[70vh] flex-col items-center justify-center gap-8">
+  <form #emailForm="ngForm" (ngSubmit)="submitEmail(emailForm)" class="flex gap-2.5">
+    <input
+      type="email"
+      name="email"
+      [(ngModel)]="email"
+      required
+      email
+      placeholder="Enter email"
+      class="rounded border px-3 py-2"
+    />
+    <button type="submit" class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700">Submit</button>
+  </form>
+
+@if(showOtpInput()){
+    <app-otp-input
+    [length]="6"
+    label="Verification code"
+    submitButtonText="Submit OTP"
+    (otpChange)="onOtpChange($event)"
+    (otpSubmit)="onOtpSubmit($event)"
+  />
+}
 </div>

@@ -10,5 +10,9 @@ export const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent
+  },
+  {
+    path: 'myarea',
+    loadChildren: () => import('./myarea/myarea.routes').then((m) => m.MYAREA_ROUTES)
   }
 ];
