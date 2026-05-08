@@ -11,7 +11,7 @@ export const MYAREA_ROUTES: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'childplayarea',
+        redirectTo: 'myexpnses',
         pathMatch: 'full'
       },
       {

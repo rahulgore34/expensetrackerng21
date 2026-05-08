@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { OtpInputComponent } from '../shared/otp-input/otp-input.component';
 import { Router } from '@angular/router';
+import { Sharedstate } from '../services/sharedstate';
 
 @Component({
   selector: 'app-auth',
@@ -26,6 +27,7 @@ export class AuthComponent implements OnDestroy {
     }
 
     console.log('Submitted email:', this.email);
+
     const subscription = this.httpDataService.postData('api/send-otp', { email: this.email }).subscribe({
       next: (response) => {
         console.log('OTP sent successfully:', response);
@@ -43,14 +45,17 @@ export class AuthComponent implements OnDestroy {
   onOtpChange(otp: string) {
     this.otp = otp;
   }
-
+sharedstate = inject(Sharedstate);
   onOtpSubmit(otp: string) {
+        // write logic to navigate to myarea or dashboard after successful OTP verification
+        this.router.navigate(['/myarea']);
     this.otp = otp;
     const subscription = this.httpDataService.postData('api/verify-otp', { email: this.email, otp: this.otp }).subscribe({
       next: (response) => {
         console.log('OTP verified successfully:', response);
+        this.sharedstate.setLoggedInEmail(this.email);
         // write logic to navigate to myarea or dashboard after successful OTP verification
-this.router.navigate(['/myarea']);
+        this.router.navigate(['/myarea']);
       },
       error: (error) => {
         console.error('Error sending OTP:', error);
