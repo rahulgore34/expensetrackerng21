@@ -26,7 +26,7 @@ export class MyexpnsesComponent implements OnInit, OnDestroy {
   });
   loggedInEmail = this.sharedState.initNameFromEmail();
   httpDataService = inject(HttpDataService);
-  showSuccessMessage = signal<boolean>(true);
+  showSuccessMessage = signal<boolean>(false);
   ngOnInit() {
     // Initialization logic if needed
   }
@@ -38,7 +38,7 @@ export class MyexpnsesComponent implements OnInit, OnDestroy {
       paidFrom: this.expenseForm.get('paidFrom')?.value,
       date: this.expenseForm.get('expenseDate')?.value
     }
-    this.subscription = this.httpDataService.postData('api/save-expense', reqPayload, true).subscribe({
+    this.subscription = this.httpDataService.postData('api/save-expense', reqPayload).subscribe({
       next: (response) => {
         console.log('Expense added successfully:', response);
         this.showSuccessMessage.set(true);
