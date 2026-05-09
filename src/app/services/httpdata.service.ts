@@ -10,13 +10,21 @@ export class HttpDataService {
 
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getData(endpoint: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
   }
 
-  postData(endpoint: string, data: any): Observable<any> {
+  postData(endpoint: string, data: any, setHeaders?: boolean): Observable<any> {
+
+    if (setHeaders) {
+      const token = localStorage.getItem('token');
+      const headers = {
+        Authorization: `Bearer ${token}`
+      };
+        return this.http.post<any>(`${this.apiUrl}/${endpoint}`, data, { headers });
+    }
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, data);
   }
 

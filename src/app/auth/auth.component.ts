@@ -25,9 +25,6 @@ export class AuthComponent implements OnDestroy {
     if (form.invalid) {
       return;
     }
-
-    console.log('Submitted email:', this.email);
-
     const subscription = this.httpDataService.postData('api/send-otp', { email: this.email }).subscribe({
       next: (response) => {
         console.log('OTP sent successfully:', response);
@@ -45,15 +42,15 @@ export class AuthComponent implements OnDestroy {
   onOtpChange(otp: string) {
     this.otp = otp;
   }
-sharedstate = inject(Sharedstate);
+  sharedstate = inject(Sharedstate);
   onOtpSubmit(otp: string) {
-        // write logic to navigate to myarea or dashboard after successful OTP verification
-        this.router.navigate(['/myarea']);
+    // write logic to navigate to myarea or dashboard after successful OTP verification
     this.otp = otp;
     const subscription = this.httpDataService.postData('api/verify-otp', { email: this.email, otp: this.otp }).subscribe({
       next: (response) => {
         console.log('OTP verified successfully:', response);
         this.sharedstate.setLoggedInEmail(this.email);
+        localStorage.setItem('token', response.token);
         // write logic to navigate to myarea or dashboard after successful OTP verification
         this.router.navigate(['/myarea']);
       },
