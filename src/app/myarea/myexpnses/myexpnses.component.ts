@@ -15,7 +15,7 @@ export class MyexpnsesComponent implements OnInit, OnDestroy {
   private readonly formBuilder = inject(FormBuilder);
   sharedState = inject(Sharedstate);
   private subscription: Subscription | null = null;
-  readonly paidFromOptions = ['UPI', 'Cash', 'Card', 'Bank Transfer'];
+  readonly paidFromOptions = ['UPI', 'Cash', 'Card', 'Bank Transfer','Amazon Paylater'];
   private readonly today = new Date().toISOString().split('T')[0];
 
   readonly expenseForm = this.formBuilder.nonNullable.group({
