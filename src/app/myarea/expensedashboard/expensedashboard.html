@@ -1,0 +1,42 @@
+<section class="dashboard-actions">
+  <h1>Expense Dashboard</h1>
+
+  <div class="button-group">
+    <button type="button" routerLink="/myarea/myexpnses">Add expense</button>
+    <button type="button" (click)="getexpenserecords()">Get your all expenses</button>
+  </div>
+
+  @if (statusCode() !== null) {
+    <div class="records-summary">
+      <p>Status Code: {{ statusCode() }}</p>
+      <p>Total Records: {{ expenseCount() }}</p>
+    </div>
+  }
+
+  @if (expenseRecords().length > 0) {
+    <div class="table-wrapper">
+      <table class="expense-table">
+        <thead>
+          <tr>
+            <th>Expense Name</th>
+            <th>Amount</th>
+            <th>Paid From</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (expense of expenseRecords(); track $index) {
+            <tr>
+              <td>{{ expense.expenseName }}</td>
+              <td>{{ expense.amount }}</td>
+              <td>{{ expense.paidFrom }}</td>
+              <td>{{ expense.date }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else if (statusCode() === 200) {
+    <p class="empty-state">No expense records found.</p>
+  }
+</section>

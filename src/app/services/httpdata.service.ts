@@ -12,20 +12,20 @@ export class HttpDataService {
 
   constructor(private http: HttpClient) { }
 
-  getData(endpoint: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
+  getData<T>(endpoint: string): Observable<T> {
+    return this.http.get<T>(`${this.apiUrl}/${endpoint}`);
   }
 
-  postData(endpoint: string, data: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${endpoint}`, data);
+  postData<TResponse = any>(endpoint: string, data: any): Observable<TResponse> {
+    return this.http.post<TResponse>(`${this.apiUrl}/${endpoint}`, data);
   }
 
-  putData(endpoint: string, data: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${endpoint}`, data);
+  putData<TResponse = any>(endpoint: string, data: any): Observable<TResponse> {
+    return this.http.put<TResponse>(`${this.apiUrl}/${endpoint}`, data);
   }
 
-  deleteData(endpoint: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${endpoint}`);
+  deleteData<TResponse = any>(endpoint: string): Observable<TResponse> {
+    return this.http.delete<TResponse>(`${this.apiUrl}/${endpoint}`);
   }
 
   // Function to call HTTP GET on azurefnUrl
