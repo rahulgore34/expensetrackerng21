@@ -1,0 +1,20 @@
+<div class="table-wrapper">
+  <table class="app-table">
+    <thead>
+      <tr>
+        @for (column of columns(); track trackByColumn($index, column)) {
+          <th>{{ column.header }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows(); track trackByRow($index)) {
+        <tr>
+          @for (column of columns(); track trackByColumn($index, column)) {
+            <td>{{ getCellValue(row, column.key) ?? '-' }}</td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

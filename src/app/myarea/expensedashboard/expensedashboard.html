@@ -1,42 +1,46 @@
-<section class="dashboard-actions">
-  <h1>Expense Dashboard</h1>
-
-  <div class="button-group">
+<app-toolbar [title]="toolbarTitle" [subtitle]="toolbarSubtitle">
+  <div toolbar-actions class="button-group">
     <button type="button" routerLink="/myarea/myexpnses">Add expense</button>
     <button type="button" (click)="getexpenserecords()">Get your all expenses</button>
   </div>
+</app-toolbar>
 
-  @if (statusCode() !== null) {
-    <div class="records-summary">
-      <p>Status Code: {{ statusCode() }}</p>
-      <p>Total Records: {{ expenseCount() }}</p>
+<section class="dashboard-actions">
+  <app-card class="dashboard-card">
+    <div card-header class="card-header">
+      <p class="card-eyebrow">Expenses Overview</p>
+      <h2 class="card-title">Your saved expense records</h2>
+      <p class="card-subtitle">Use the dashboard to check response status and browse the expenses returned by the API.</p>
     </div>
-  }
+ </app-card>
+  <div class="grid grid-cols-2 gap-4">
+    <app-card class="dashboard-card col-span-1">
+      <div card-header class="card-header">
+        <p class="card-eyebrow">Expenses Summary</p>
+        <p><strong>Total Expense:</strong> {{ expenseSummary()?.totalExpense | currency: 'INR' }}</p>
+        <p><strong>Total Transactions:</strong> {{ expenseSummary()?.totalTransactions }}</p>
+        <p><strong>Top Category:</strong> {{ expenseSummary()?.topCategory }}</p>
+        <p><strong>Top Category Frequency:</strong> {{ expenseSummary()?.topCategoryFrequency }}</p>
+        <p><strong>Top Most Used Payment Method:</strong> {{ expenseSummary()?.mostUsedPaymentMethod }}</p>
+      </div>
+    </app-card>
+    <app-card class="dashboard-card col-span-1">
+      <div card-header class="card-header">
+        <p class="card-eyebrow">Monthy Expenses Summary Chart</p>
+      </div>
+    </app-card>
+  </div>
+    @if (statusCode() !== null) {
+      <div class="records-summary">
+        <p>Status Code: {{ statusCode() }}</p>
+        <p>Total Records: {{ expenseCount() }}</p>
+      </div>
+    }
 
-  @if (expenseRecords().length > 0) {
-    <div class="table-wrapper">
-      <table class="expense-table">
-        <thead>
-          <tr>
-            <th>Expense Name</th>
-            <th>Amount</th>
-            <th>Paid From</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (expense of expenseRecords(); track $index) {
-            <tr>
-              <td>{{ expense.expenseName }}</td>
-              <td>{{ expense.amount }}</td>
-              <td>{{ expense.paidFrom }}</td>
-              <td>{{ expense.date }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-  } @else if (statusCode() === 200) {
-    <p class="empty-state">No expense records found.</p>
-  }
+    @if (expenseRecords().length > 0) {
+      <app-table [columns]="expenseTableColumns" [rows]="expenseRecords()"></app-table>
+    } @else if (statusCode() === 200) {
+      <p class="empty-state">No expense records found.</p>
+    }
+
 </section>

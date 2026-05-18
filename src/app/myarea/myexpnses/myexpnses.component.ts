@@ -3,13 +3,14 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Sharedstate } from '../../services/sharedstate';
 import { HttpDataService } from '../../services/httpdata.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-myexpnses',
   standalone: true,
   templateUrl: './myexpnses.component.html',
   styleUrl: './myexpnses.component.css',
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule,RouterLink]
 })
 export class MyexpnsesComponent implements OnInit, OnDestroy {
   private readonly formBuilder = inject(FormBuilder);

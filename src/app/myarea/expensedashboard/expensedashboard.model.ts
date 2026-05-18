@@ -11,3 +11,11 @@ export interface ExpenseRecordsResponse {
   count: number;
   data: ExpenseRecord[];
 }
+
+export interface ExpenseSummary {
+  mostUsedPaymentMethod: string;
+  topCategory: string;
+  topCategoryFrequency: number;
+  totalExpense: number;
+  totalTransactions: number;
+}

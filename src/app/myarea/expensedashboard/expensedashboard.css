@@ -6,12 +6,12 @@
   min-height: 60vh;
   padding: 2rem;
   text-align: center;
+  background: #f8fafc;
 }
 
-.dashboard-actions h1 {
-  margin: 0;
-  color: #1e293b;
-  font-size: 2rem;
+.dashboard-card {
+  width: 100%;
+  max-width: 960px;
 }
 
 .button-group {
@@ -43,43 +43,46 @@
   gap: 1.5rem;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 1.5rem;
   color: #334155;
   font-weight: 600;
 }
 
 .records-summary p {
   margin: 0;
+  border-radius: 999px;
+  background: #f8fafc;
+  padding: 0.7rem 1rem;
 }
 
-.table-wrapper {
-  width: 100%;
-  max-width: 900px;
-  overflow-x: auto;
-  border-radius: 1rem;
-  background: #ffffff;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
-}
-
-.expense-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.expense-table th,
-.expense-table td {
-  padding: 1rem;
-  border-bottom: 1px solid #e2e8f0;
+.card-header {
   text-align: left;
 }
 
-.expense-table th {
-  background: #eff6ff;
-  color: #1e3a8a;
-  font-size: 0.95rem;
+.card-eyebrow {
+  margin: 0;
+  color: #0284c7;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
 }
 
-.expense-table td {
-  color: #334155;
+.card-title {
+  margin: 0.75rem 0 0;
+  color: #0f172a;
+  font-size: 1.6rem;
+}
+
+.card-subtitle {
+  margin: 0.75rem 0 0;
+  max-width: 48rem;
+  color: #64748b;
+}
+
+.dashboard-actions app-table {
+  width: 100%;
+  max-width: 900px;
 }
 
 .empty-state {
